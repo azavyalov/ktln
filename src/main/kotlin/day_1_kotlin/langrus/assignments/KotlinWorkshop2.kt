@@ -20,7 +20,6 @@ object KotlinWorkshop2 {
     @JvmStatic
     fun main(args: Array<String>) {
 
-
         /* Рабочая зона */
 
         // Когда программа запущена, ввод с клавиатуры ожидается внизу, во вкладке RUN.
@@ -38,11 +37,16 @@ object KotlinWorkshop2 {
             //  Если введено число меньше "randomNumber", выведи сообщение "Ваше число меньше задуманного, пожалуйста продолжаем."
             //  Если введено число больше "randomNumber", выведи сообщение "Ваше число больше задуманного, пожалуйста продолжаем."
 
-            print("Введите число в диапазоне 0..$nonNullUpperBound включительно: ")
+            println("Введите число в диапазоне 0..$nonNullUpperBound включительно: ")
             // Сохраняем введённое с клавиатуры число в "userInput".
             val userInput: Int = scanner.nextInt()
-            if (true) {
-
+            if (userInput == randomNumber) {
+                println("Поздравляю! Задуманное число $randomNumber")
+                break
+            } else if (userInput < randomNumber) {
+                println("Ваше число меньше задуманного, пожалуйста продолжаем.")
+            } else {
+                println("Ваше число больше задуманного, пожалуйста продолжаем.")
             }
         }
 
@@ -51,14 +55,17 @@ object KotlinWorkshop2 {
 
         // TODO 2: Раскомментируй. Проинициализируй "numbersArray".
         //  "numbersArray" это массив целочисленных значений, длинной 5 чисел.
-//        val numbersArray =
+        val numbersArray = intArrayOf(5, 6, 3, 2, 5)
+        for ((index, value) in numbersArray.withIndex()) {
+            println("Cell #$index contains $value")
+        }
 
         // TODO 3: Раскомментируй. Проинициализируй свойство "size" длинной массива "numbersArray".
         //  Измени условия повтора бесконечного цикла while так, чтобы он стал конечным и выполнился не более "size" раз.
         println("\n Программа 2. \"Введите коллекцию чисел\"")
-//        val size =
+        val size = numbersArray.size
         var counter = 0
-        while (true) {
+        while (counter < size) {
             print("Введите число в диапазоне 0..10 включительно: ")
             val userInput: Int = scanner.nextInt()
 
@@ -68,16 +75,20 @@ object KotlinWorkshop2 {
             //  - Если введено 9 - сложи и добавь (2 + size);
             //  - Иначе не добавляй ничего.
             //  Используй выражение "When".
-            when {
-
+            when (userInput) {
+                3 -> numbersArray.set(counter, userInput)
+                5 -> numbersArray.set(counter, 5 * size)
+                9 -> numbersArray.set(counter, 2 + size)
+                else -> {}
             }
-
             counter++
         }
 
         // TODO 5: Выведи в консоль значения элементов массива и индекс, на котором они находятся.
         //  Новый элемент на новой строке. Это должно выглядеть как "индекс: значение".
-
+        for ((index, value) in numbersArray.withIndex()) {
+            println("Cell #$index contains $value")
+        }
     }
 
 
@@ -85,7 +96,7 @@ object KotlinWorkshop2 {
 
     private fun getUpperBound(): Int? {
         println("Программа 1. \"Угадай число\"")
-        print("Введите число максимум в диапазоне 10..20 включительно: ")
+        println("Введите число максимум в диапазоне 10..20 включительно: ")
         val scanner = Scanner(System.`in`)
         return try {
             scanner.nextInt()
